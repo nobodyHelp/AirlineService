@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Ticket>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Tickets list</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Ticket" asp-action="Create" class="btn btn-primary">
+                Create new ticket
+            </a>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Departure Point
+            </th>
+            <th>
+                Destination Point
+            </th>
+            <th>
+                Order Number
+            </th>
+            <th>
+                Service Provider
+            </th>
+            <th>
+                Date of Departure
+            </th>
+            <th>
+                Date Of Arrival
+            </th>
+            <th>
+                Date of Service
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td width="2%">
+                    @obj.Id
+                </td>
+                <td width="10%">
+                    @obj.DeparturePoint
+                </td>
+                <td width="10%">
+                    @obj.DestinationPoint
+                </td>
+                <td width="15%">
+                    @obj.OrderNumber
+                </td>
+                <td width="15%">
+                    @obj.ServiceProvider
+                </td>
+                <td width="15%">
+                    @obj.DateOfDeparture
+                </td>
+                <td width="15%">
+                    @obj.DateOfArrival
+                </td>
+                <td width="15%">
+                    @obj.DateOfService
+                </td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="Ticket" asp-action="Edit" asp-route-id="@obj.Id"
+                        class="btn btn-primary mx-2"> Edit</a>
+                        <a asp-controller="Ticket" asp-action="Delete" asp-route-id="@obj.Id"
+                        class="btn btn-primary mx-2"> Delete</a>
+                        <a asp-controller="Ticket" asp-action="MoreInfo" asp-route-id="@obj.Id"
+                        class="btn btn-primary mx-2"> More</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

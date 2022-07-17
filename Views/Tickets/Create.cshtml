@@ -1,0 +1,60 @@
+﻿@model AirlineService.Data.Entities.Ticket
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Ticket</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DeparturePoint" class="control-label"></label>
+                <input asp-for="DeparturePoint" class="form-control" />
+                <span asp-validation-for="DeparturePoint" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DestinationPoint" class="control-label"></label>
+                <input asp-for="DestinationPoint" class="form-control" />
+                <span asp-validation-for="DestinationPoint" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderNumber" class="control-label"></label>
+                <input asp-for="OrderNumber" class="form-control" />
+                <span asp-validation-for="OrderNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ServiceProvider" class="control-label"></label>
+                <input asp-for="ServiceProvider" class="form-control" />
+                <span asp-validation-for="ServiceProvider" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfDeparture" class="control-label"></label>
+                <input asp-for="DateOfDeparture" class="form-control" />
+                <span asp-validation-for="DateOfDeparture" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfArrival" class="control-label"></label>
+                <input asp-for="DateOfArrival" class="form-control" />
+                <span asp-validation-for="DateOfArrival" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfService" class="control-label"></label>
+                <input asp-for="DateOfService" class="form-control" />
+                <span asp-validation-for="DateOfService" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

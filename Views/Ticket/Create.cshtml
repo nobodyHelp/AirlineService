@@ -1,0 +1,43 @@
+﻿@model Ticket
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create ticket</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="DeparturePoint"></label>
+            <input asp-for="DeparturePoint" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="DestinationPoint"></label>
+            <input asp-for="DestinationPoint" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="OrderNumber"></label>
+            <input asp-for="OrderNumber" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="ServiceProvider"></label>
+            <input asp-for="ServiceProvider" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="DateOfDeparture"></label>
+            <input asp-for="DateOfDeparture" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="DateOfArrival"></label>
+            <input asp-for="DateOfArrival" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="DateOfService"></label>
+            <input asp-for="DateOfService" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+        <a asp-controller="Ticket" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back to list
+        </a>
+    </div>
+
+</form>
