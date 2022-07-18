@@ -11,6 +11,8 @@
         public DateTime DateOfArrival { get; set; }
         public DateTime DateOfService { get; set; }
 
-        public List<Passenger>? Passengers { get; set; }
+        public Passenger Passenger { get; set; }
+
+        public int PassengerId { get; set; }
     }
 }

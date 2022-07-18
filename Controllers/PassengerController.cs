@@ -112,5 +112,21 @@ namespace AirlineService.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Report(int id)
+        {
+            var passenger = _context.Passengers.Find(id);
+            if (passenger == null)
+            {
+                return NotFound();
+            }
+
+            passenger = _context.Passengers
+                .Where(passenger => passenger.Id == id)
+                .Include(p => p.Ticket)
+                .FirstOrDefault();
+
+            return View(passenger);
+        }
     }
 }

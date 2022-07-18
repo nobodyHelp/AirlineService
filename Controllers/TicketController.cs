@@ -24,25 +24,8 @@ namespace AirlineService.Controllers
 
             ticket = _context.Tickets
                 .Where(ticket => ticket.Id == id)
-                .Include(p => p.Passengers)
+                .Include(p => p.Passenger)
                 .ThenInclude(d => d.Documents)
-                .FirstOrDefault();
-
-            return View(ticket);
-        }
-
-        //GET
-        public IActionResult Passengers(int id)
-        {
-            var ticket = _context.Tickets.Find(id);
-            if (ticket == null)
-            {
-                return NotFound();
-            }
-
-            ticket = _context.Tickets
-                .Where(ticket => ticket.Id == id)
-                .Include(p => p.Passengers)                
                 .FirstOrDefault();
 
             return View(ticket);
@@ -126,6 +109,23 @@ namespace AirlineService.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        //GET
+        public IActionResult GetPassenger(int id)
+        {
+            var passenger = _context.Tickets.Find(id);
+            if (passenger == null)
+            {
+                return NotFound();
+            }
+
+            passenger = _context.Tickets
+                .Where(t => t.Id == id)
+                .Include(p => p.Passenger)
+                .FirstOrDefault();
+
+            return View(passenger);
         }
     }
 }

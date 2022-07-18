@@ -53,11 +53,13 @@
                 <td>
                     <div class="w-75 btn-group" role="group">
                         <a asp-controller="Passenger" asp-action="Edit" asp-route-id="@obj.Id"
-                        class="btn btn-primary mx-2"> Edit</a>
-                        <a asp-controller="Passenger" asp-action="Delete" asp-route-id="@obj.Id"
-                        class="btn btn-primary mx-2"> Delete</a>
+                        class="btn btn-primary mx-2"> Edit</a>                        
                         <a asp-controller="Passenger" asp-action="GetDocument" asp-route-id="@obj.Id"
                         class="btn btn-primary mx-2"> Docs</a>
+                        <a asp-controller="Passenger" asp-action="Report" asp-route-id="@obj.Id"
+                        class="btn btn-primary mx-2"> Report</a>
+                        <a asp-controller="Passenger" asp-action="Delete" asp-route-id="@obj.Id"
+                        class="btn btn-danger mx-2"> Delete</a>
                     </div>
                 </td>
             </tr>

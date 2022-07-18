@@ -4,6 +4,7 @@ using AirlineService.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AirlineService.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220718115352_RelationshipsUpdate")]
+    partial class RelationshipsUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,6 +69,9 @@ namespace AirlineService.Migrations
                     b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TicketId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Passengers");
@@ -101,18 +106,28 @@ namespace AirlineService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PassengerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ServiceProvider")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PassengerId");
-
                     b.ToTable("Tickets");
+                });
+
+            modelBuilder.Entity("PassengerTicket", b =>
+                {
+                    b.Property<int>("PassengersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TicketId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PassengersId", "TicketId");
+
+                    b.HasIndex("TicketId");
+
+                    b.ToTable("PassengerTicket");
                 });
 
             modelBuilder.Entity("AirlineService.Data.Entities.Document", b =>
@@ -126,22 +141,24 @@ namespace AirlineService.Migrations
                     b.Navigation("Passenger");
                 });
 
-            modelBuilder.Entity("AirlineService.Data.Entities.Ticket", b =>
+            modelBuilder.Entity("PassengerTicket", b =>
                 {
-                    b.HasOne("AirlineService.Data.Entities.Passenger", "Passenger")
-                        .WithMany("Ticket")
-                        .HasForeignKey("PassengerId")
+                    b.HasOne("AirlineService.Data.Entities.Passenger", null)
+                        .WithMany()
+                        .HasForeignKey("PassengersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Passenger");
+                    b.HasOne("AirlineService.Data.Entities.Ticket", null)
+                        .WithMany()
+                        .HasForeignKey("TicketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AirlineService.Data.Entities.Passenger", b =>
                 {
                     b.Navigation("Documents");
-
-                    b.Navigation("Ticket");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,0 +1,62 @@
+﻿@model AirlineService.Data.Entities.Passenger
+
+@{
+    ViewData["Title"] = "Report";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Report</h2>
+        </div>
+    </div>
+</div>
+<div>
+    <hr />
+    <dl class="row">        
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket)
+        </dt>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Date Of Service</th>
+                    <th>Date of Arrival</th>
+                    <th>Order Number</th>
+                    <th>Departure Point</th>
+                    <th>Destination Point</th>
+                    <th>Service Rendered</th>
+
+                </tr>
+                @foreach (var item in Model.Ticket)
+                {                                           
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateOfService)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateOfArrival)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeparturePoint)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DestinationPoint)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                    </tr>                                                            
+                }                
+            </table>
+        </dd>
+    </dl>
+</div>
+<div>    
+    <a asp-controller="Passenger" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back to list
+        </a>
+</div>
