@@ -11,9 +11,7 @@ namespace AirlineService.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Ticket> ticketsList = _context.Tickets.ToList();
-
-            return View(ticketsList);
+            return View(_context.Tickets.ToList());
         }
 
         public IActionResult MoreInfo(int id)
@@ -93,38 +91,41 @@ namespace AirlineService.Controllers
             return RedirectToAction("Index");
         }
 
-        //GET
-        public IActionResult Delete(int? id)
+        // GET: Tickets/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var ticketFromDB = _context.Tickets.Find(id);
-
-            if (ticketFromDB == null)
+            if (id == null || _context.Tickets == null)
             {
                 return NotFound();
             }
 
-            return View(ticketFromDB);
+            var ticket = await _context.Tickets
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+
+            return View(ticket);
         }
 
-        //POST
-        [HttpDelete]
+        // POST: Tickets/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeletePOST(int? id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var ticketFromDB = _context.Tickets.Find(id);
-
-            if (ticketFromDB == null)
+            if (_context.Tickets == null)
             {
-                return NotFound();
+                return Problem("Entity set 'DataContext.Tickets'  is null.");
+            }
+            var ticket = await _context.Tickets.FindAsync(id);
+            if (ticket != null)
+            {
+                _context.Tickets.Remove(ticket);
             }
 
-            _context.Tickets.Remove(ticketFromDB);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

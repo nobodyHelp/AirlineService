@@ -1,9 +1,10 @@
 ﻿@model Passenger
 
-<form method="post" asp-action="DeletePOST">
+<form method="post" asp-action="Delete">
+    <input asp-for="Id" type="hidden" />
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2 class="text-primary">Create passenger</h2>
+            <h2 class="text-primary">Delete passenger</h2>
             <hr />
         </div>
         <div class="mb-3">

@@ -2,35 +2,19 @@
 
 namespace AirlineService.Controllers
 {
-    public class PassengerController : Controller
+    public class DocumentController : Controller
     {
         private readonly DataContext _context;
-        public PassengerController(DataContext context)
+        public DocumentController(DataContext context)
         {
             _context = context;
         }
+
         public IActionResult Index()
         {
             IEnumerable<Passenger> passengerList = _context.Passengers.ToList();
 
             return View(passengerList);
-        }
-
-        //GET
-        public IActionResult GetDocument(int id)
-        {
-            var passenger = _context.Passengers.Find(id);
-            if (passenger == null)
-            {
-                return NotFound();
-            }
-
-            passenger = _context.Passengers
-                .Where(passenger => passenger.Id == id)
-                .Include(p => p.Documents)
-                .FirstOrDefault();
-
-            return View(passenger);
         }
 
         //GET
@@ -42,9 +26,9 @@ namespace AirlineService.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Passenger passenger)
+        public IActionResult Create(Document document)
         {
-            _context.Passengers.Add(passenger);
+            _context.Documents.Add(document);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -56,22 +40,22 @@ namespace AirlineService.Controllers
             {
                 return NotFound();
             }
-            var passengerFromDB = _context.Passengers.Find(id);
+            var documentFromDb = _context.Passengers.Find(id);
 
-            if (passengerFromDB == null)
+            if (documentFromDb == null)
             {
                 return NotFound();
             }
 
-            return View(passengerFromDB);
+            return View(documentFromDb);
         }
 
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Passenger passenger)
+        public IActionResult Edit(Document document)
         {
-            _context.Passengers.Update(passenger);
+            _context.Documents.Update(document);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -79,19 +63,19 @@ namespace AirlineService.Controllers
         // GET: Passenger/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Passengers == null)
+            if (id == null || _context.Documents == null)
             {
                 return NotFound();
             }
 
-            var passenger = await _context.Passengers
+            var document = await _context.Documents
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (passenger == null)
+            if (document == null)
             {
                 return NotFound();
             }
 
-            return View(passenger);
+            return View(document);
         }
 
         // POST: Passenger/Delete/5
@@ -99,18 +83,18 @@ namespace AirlineService.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Passengers == null)
+            if (_context.Documents == null)
             {
                 return Problem("Entity set 'DataContext.Tickets'  is null.");
             }
-            var passenger = await _context.Passengers.FindAsync(id);
-            if (passenger != null)
+            var document = await _context.Documents.FindAsync(id);
+            if (document != null)
             {
-                _context.Passengers.Remove(passenger);
+                _context.Documents.Remove(document);
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(PassengerController.Index));
         }
     }
 }

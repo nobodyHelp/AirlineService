@@ -1,0 +1,27 @@
+﻿@model Document
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Add document</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Type"></label>
+            <input asp-for="Type" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Number"></label>
+            <input asp-for="Number" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="PassengerId"></label>
+            <input asp-for="PassengerId" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+        <a asp-controller="Ticket" asp-action="Passengers" class="btn btn-secondary" style="width:150px">
+            Back to list
+        </a>
+    </div>
+
+</form>
