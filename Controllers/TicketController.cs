@@ -34,6 +34,23 @@ namespace AirlineService.Controllers
         }
 
         //GET
+        public IActionResult Passengers(int id)
+        {
+            var ticket = _context.Tickets.Find(id);
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+
+            ticket = _context.Tickets
+                .Where(ticket => ticket.Id == id)
+                .Include(p => p.Passengers)                
+                .FirstOrDefault();
+
+            return View(ticket);
+        }
+
+        //GET
         public IActionResult Create()
         {            
             return View();

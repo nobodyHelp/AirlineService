@@ -1,0 +1,42 @@
+﻿@model AirlineService.Data.Entities.Passenger
+
+@{
+    ViewData["Title"] = "Document";
+}
+
+<h1>Passengers</h1>
+
+<div>
+    <h4>Passenger</h4>
+    <hr />
+    <dl class="row">        
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Documents)
+        </dt>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Type</th>
+                    <th>Number</th>
+                </tr>
+                @foreach (var item in Model.Documents)
+                {                                           
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Number)
+                        </td>                                              
+                    </tr>                                                            
+                }
+                
+            </table>
+        </dd>
+    </dl>
+</div>
+<div>    
+    <a asp-controller="Passenger" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back to list
+        </a>
+</div>
