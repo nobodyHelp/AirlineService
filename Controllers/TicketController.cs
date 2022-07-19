@@ -14,6 +14,13 @@ namespace AirlineService.Controllers
             return View(_context.Tickets.ToList());
         }
 
+
+        /// <summary>
+        /// Получаем полную информацию о билете, включая данные
+        /// пассажира и документов
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IActionResult MoreInfo(int id)
         {
             var ticket = _context.Tickets.Find(id);
@@ -37,6 +44,12 @@ namespace AirlineService.Controllers
             return View();
         }
 
+
+        /// <summary>
+        /// Создаем новый билет
+        /// </summary>
+        /// <param name="ticket"></param>
+        /// <returns></returns>
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -47,6 +60,13 @@ namespace AirlineService.Controllers
             return RedirectToAction("Index");
         }
 
+
+        /// <summary>
+        /// Получаем представление редактирования
+        /// билета по идентификатору
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         //GET
         public IActionResult Edit(int? id)
         {
@@ -64,6 +84,12 @@ namespace AirlineService.Controllers
             return View(ticketFromDB);
         }
 
+
+        /// <summary>
+        /// Редактируем билет
+        /// </summary>
+        /// <param name="ticket"></param>
+        /// <returns></returns>
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -74,6 +100,12 @@ namespace AirlineService.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Получаем представление удаления билета
+        /// по его идентификатору
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: Tickets/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -92,6 +124,11 @@ namespace AirlineService.Controllers
             return View(ticket);
         }
 
+        /// <summary>
+        /// Удаляем билет
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // POST: Tickets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -111,6 +148,11 @@ namespace AirlineService.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Получаем пассажира по идентификатору билета
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         //GET
         public IActionResult GetPassenger(int id)
         {

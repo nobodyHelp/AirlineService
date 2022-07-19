@@ -10,6 +10,11 @@ namespace AirlineService.Controllers
             _context = context;
         }
 
+
+        /// <summary>
+        /// Получаем список всех пассажиров
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             IEnumerable<Passenger> passengerList = _context.Passengers.ToList();
@@ -17,12 +22,18 @@ namespace AirlineService.Controllers
             return View(passengerList);
         }
 
+        
         //GET
         public IActionResult Create()
         {
             return View();
         }
 
+        /// <summary>
+        /// Создаем новый документ
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -33,6 +44,12 @@ namespace AirlineService.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Открываем форму редактирования
+        /// документа по его идентификатору
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         //GET
         public IActionResult Edit(int? id)
         {
@@ -50,6 +67,11 @@ namespace AirlineService.Controllers
             return View(documentFromDb);
         }
 
+        /// <summary>
+        /// Редактируем документ
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -60,6 +82,12 @@ namespace AirlineService.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Открываем форму удаления
+        /// документа по его идентификатору
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: Passenger/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -78,6 +106,12 @@ namespace AirlineService.Controllers
             return View(document);
         }
 
+
+        /// <summary>
+        /// Удаляем документ
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // POST: Passenger/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
