@@ -113,8 +113,10 @@ namespace AirlineService.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Report(int id)
+        public IActionResult Report(int id, DateTime tripStart, DateTime tripEnd)
         {
+            List<Ticket> tickets = new List<Ticket>();
+
             var passenger = _context.Passengers.Find(id);
             if (passenger == null)
             {
@@ -126,7 +128,26 @@ namespace AirlineService.Controllers
                 .Include(p => p.Ticket)
                 .FirstOrDefault();
 
-            return View(passenger);
+            foreach (var item in passenger.Ticket)
+            {
+                if ((item.DateOfService <= tripStart) && (item.DateOfDeparture >= tripStart) && (item.DateOfArrival <= tripEnd))
+                {
+                   tickets.Add(item);
+                }
+
+                else if ((item.DateOfService >= tripStart) && (item.DateOfService <= tripEnd))
+                {
+                    tickets.Add(item);
+                }
+            }
+
+            ReportViewModel reportViewModel = new ReportViewModel
+            {
+                Tickets = tickets,
+                ServiceRendered = "yes"
+            };
+            
+            return View(reportViewModel);
         }
     }
 }

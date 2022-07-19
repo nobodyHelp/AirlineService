@@ -40,7 +40,7 @@ namespace AirlineService.Controllers
             {
                 return NotFound();
             }
-            var documentFromDb = _context.Passengers.Find(id);
+            var documentFromDb = _context.Documents.Find(id);
 
             if (documentFromDb == null)
             {

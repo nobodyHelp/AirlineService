@@ -14,7 +14,10 @@
             <label asp-for="Number"></label>
             <input asp-for="Number" class="form-control" />
         </div>
-
+        <div class="mb-3">
+            <label asp-for="PassengerId"></label>
+            <input asp-for="PassengerId" class="form-control" />
+        </div>
         <button type="submit" class="btn btn-primary" style="width:150px">Edit</button>
         <a asp-controller="Passenger" asp-action="Index" class="btn btn-secondary" style="width:150px">
             Back to list

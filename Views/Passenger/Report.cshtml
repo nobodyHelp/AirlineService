@@ -1,8 +1,22 @@
-﻿@model AirlineService.Data.Entities.Passenger
+﻿@model AirlineService.Data.Entities.ReportViewModel
 
 @{
     ViewData["Title"] = "Report";
 }
+
+<form method="get">
+    <div class="form-inline">
+        <label for="arrival">Departure date:</label>
+        <input type="date" id="start" name="tripStart" />
+        
+        <label for="arrival">Arrival date:</label>
+        <input type="date" id="end" name="tripEnd" />
+
+        <input type="submit" value="Filter" class="btn btn-primary" />
+    </div>
+
+
+</form>
 
 <div class="container p-3">
     <div class="row pt-4">
@@ -15,7 +29,7 @@
     <hr />
     <dl class="row">        
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ticket)
+            @Html.DisplayNameFor(model => model.Tickets)
         </dt>
         <dd class="col-sm-10">
             <table class="table">
@@ -28,7 +42,7 @@
                     <th>Service Rendered</th>
 
                 </tr>
-                @foreach (var item in Model.Ticket)
+                @foreach (var item in Model.Tickets)
                 {                                           
                     <tr>
                         <td>
@@ -47,7 +61,7 @@
                             @Html.DisplayFor(modelItem => item.DestinationPoint)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Id)
+                            @Html.DisplayFor(modelItem => Model.ServiceRendered)
                         </td>
                     </tr>                                                            
                 }                
